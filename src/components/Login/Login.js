@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import "./Login.css";
+import React, { useState } from 'react';
+import './Login.css';
 
 function Login() {
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
 
-  const onSubmit = (e) => {
+  const onSubmit = e => {
     e.preventDefault();
   };
 
@@ -16,10 +16,10 @@ function Login() {
           <div
             className="absolute top-0 w-full h-full bg-gray-900"
             style={{
-              backgroundSize: "100%",
+              backgroundSize: '100%',
               background:
-                "linear-gradient(135deg, #b3cae5 12%, #dbdde4 46%, #e4e3e4 70%, #f7ddbb 94%, #efcab2 100%)",
-              backgroundRepeat: "no-repeat",
+                'linear-gradient(135deg, #b3cae5 12%, #dbdde4 46%, #e4e3e4 70%, #f7ddbb 94%, #efcab2 100%)',
+              backgroundRepeat: 'no-repeat',
             }}
           />
           <div className="container mx-auto px-10 h-full">
@@ -33,7 +33,7 @@ function Login() {
                     <hr className="mt-6 border-b-1 border-gray-400" />
                     <form onSubmit={onSubmit}>
                       <div className="relative w-full mb-3">
-                        <label
+                        {/* <label
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
@@ -50,7 +50,7 @@ function Login() {
                           style={{ transition: "all .15s ease" }}
                           onChange={(e) => setName(e.target.value)}
                           noValidate
-                        />
+                        /> */}
                         {/*
                         {errors.username.length > 0 && (
                           <span className="text-red-700 uppercase font-bold text-xxs">
@@ -74,10 +74,10 @@ function Login() {
                           value={password}
                           className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:shadow-outline w-full"
                           placeholder="Enter your password"
-                          style={{ transition: "all .15s ease" }}
+                          style={{ transition: 'all .15s ease' }}
                           onKeyDown={() => {}}
                           autoComplete="off"
-                          onChange={(e) => setPassword(e.target.value)}
+                          onChange={e => setPassword(e.target.value)}
                           noValidate
                         />
                         {/*

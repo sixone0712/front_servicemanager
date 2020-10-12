@@ -1,6 +1,17 @@
-import React from 'react';
-import { Table, Tag, Space, Spin, Row, Col, Layout, Breadcrumb } from 'antd';
-import { RedoOutlined, C, BulbOutlined } from '@ant-design/icons';
+import React, { useCallback } from 'react';
+import {
+  Table,
+  Tag,
+  Space,
+  Spin,
+  Row,
+  Col,
+  Layout,
+  Breadcrumb,
+  Button,
+} from 'antd';
+import { RedoOutlined, SyncOutlined } from '@ant-design/icons';
+import styled from 'styled-components';
 
 const { Column, ColumnGroup } = Table;
 
@@ -116,7 +127,7 @@ const data = [
     type: 'OTS',
     name: 'OTS_05',
     ip: '10.1.31.144',
-    status: ['File Service Collect (Exited 12 seconds)'],
+    status: ['Unknown'],
     volume: '100G / 500G',
     dockerRestart: 'Restart',
     osRestart: 'Restart',
@@ -133,13 +144,54 @@ const data = [
   },
 ];
 
+const StatusColor = styled(Col)`
+  color: ${({ status }) => {
+    if (status.includes('Up')) {
+      return '#90EE90'; // LightGreen
+    }
+    if (status.includes('Exited')) {
+      return '#FF4500'; // OragneRed
+    }
+    return '#778899'; // LightSlateGray
+  }};
+`;
+
+const StatusText = styled(Col)`
+  padding-left: 5px;
+`;
+
 function StatusTable() {
+  const renderStatus = (text, record, index) => {
+    console.log('name', text);
+    console.log('record', record);
+    console.log('index', index);
+    return (
+      <>
+        {text.map(item => (
+          <Row justify="center">
+            <StatusColor status={item}>●</StatusColor>
+            <StatusText>{item}</StatusText>
+          </Row>
+        ))}
+      </>
+    );
+  };
+
   return (
-    <Layout style={{ height: '320px' }}>
-      <Breadcrumb style={{ margin: '16px 0' }}>
+    <Layout style={{ height: '360px' }}>
+      <Breadcrumb style={{ margin: '10px 0' }}>
         <Breadcrumb.Item>DashBoard</Breadcrumb.Item>
         <Breadcrumb.Item>Device Status</Breadcrumb.Item>
       </Breadcrumb>
+      <Row justify="end" style={{ marginBottom: '10px' }}>
+        <Button
+          style={{ width: '100px' }}
+          type="primary"
+          icon={<SyncOutlined style={{ verticalAlign: 0 }} />}
+        >
+          Reload
+        </Button>
+      </Row>
       <Table
         tableLayout="fixed"
         size="small"
@@ -168,37 +220,7 @@ function StatusTable() {
           key="status"
           align="center"
           width="35%"
-          render={(text, record, index) => {
-            console.log('name', text);
-            console.log('record', record);
-            console.log('index', index);
-            return (
-              <>
-                {text.map(item => {
-                  let style;
-                  if (item.includes('Up')) {
-                    style = {
-                      color: 'green',
-                    };
-                  } else if (item.includes('Exited')) {
-                    style = {
-                      color: 'red',
-                    };
-                  } else {
-                    style = {
-                      color: 'gray',
-                    };
-                  }
-                  return (
-                    <Row justify="center">
-                      <Col style={style}>●</Col>
-                      <Col>{item}</Col>
-                    </Row>
-                  );
-                })}
-              </>
-            );
-          }}
+          render={renderStatus}
         />
         <Column
           title="Volume"
