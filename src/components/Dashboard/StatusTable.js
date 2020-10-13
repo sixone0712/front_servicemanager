@@ -178,7 +178,7 @@ function StatusTable() {
   };
 
   return (
-    <Layout style={{ height: '360px' }}>
+    <Layout style={{ height: '360px', minWidth: '950px' }}>
       <Breadcrumb style={{ margin: '10px 0' }}>
         <Breadcrumb.Item>DashBoard</Breadcrumb.Item>
         <Breadcrumb.Item>Device Status</Breadcrumb.Item>

@@ -6,32 +6,6 @@ const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 const { Column, ColumnGroup } = Table;
 
-const columns = [
-  {
-    title: 'Type',
-    dataIndex: 'type',
-    filters: [
-      {
-        text: 'Tomcat Log',
-        value: 'Tomcat Log',
-      },
-      {
-        text: 'User Log',
-        value: 'User Log',
-      },
-    ],
-    onFilter: (value, record) => record.type.indexOf(value) === 0,
-  },
-  {
-    title: 'File Name',
-    dataIndex: 'fileName',
-  },
-  {
-    title: 'File Size',
-    dataIndex: 'fileSize',
-  },
-];
-
 const data = [];
 for (let i = 0; i < 46; i++) {
   data.push({
@@ -58,7 +32,6 @@ function LogTable() {
     // <Layout style={{ padding: '0 24px 24px' }}>
     <Layout>
       <Content
-        className="site-layout-background"
         style={{
           paddingLeft: '24px',
           margin: 0,
@@ -90,13 +63,16 @@ function LogTable() {
           bordered
           pagination={{ pageSize: 7, position: ['bottomCenter'] }}
           tableLayout="fixed"
+          // style={{
+          //   minWidth: '675px',
+          // }}
         >
           <Column
             title="File Type"
             dataIndex="fileType"
             key="fileType"
             align="center"
-            // width="15%"
+            width="35%"
             filters={[
               {
                 text: 'Tomcat Log',
@@ -114,14 +90,14 @@ function LogTable() {
             dataIndex="fileName"
             key="fileName"
             align="center"
-            // width="15%"
+            width="50%"
           />
           <Column
             title="File Size"
             dataIndex="fileSize"
             key="fileSize"
             align="center"
-            // width="15%"
+            width="15%"
           />
         </Table>
       </Content>
