@@ -18,6 +18,7 @@ for (let i = 0; i < 46; i++) {
 
 function LogTable() {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  console.log('selectedRowKeys', selectedRowKeys);
 
   const onSelectChange = selectedRowKeys => {
     console.log('selectedRowKeys changed: ', selectedRowKeys);
@@ -27,6 +28,17 @@ function LogTable() {
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
+    onSelect: (record, selected, selectedRows) => {
+      console.log('OnSelect', record, selected, selectedRows);
+    },
+    onSelectAll: (selected, selectedRows, changeRows) => {
+      console.log('onSelectAll', selected, selectedRows, changeRows);
+      if (selected) {
+        setSelectedRowKeys(data.map(item => item.key));
+      } else {
+        setSelectedRowKeys([]);
+      }
+    },
   };
   return (
     // <Layout style={{ padding: '0 24px 24px' }}>
